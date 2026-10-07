@@ -1,0 +1,36 @@
+scenarios:
+  BASE:
+    description: "Stable economic environment"
+    pd_multiplier: 1.0
+    lgd_multiplier: 1.0
+    unemployment_rate: 0.04
+    interest_rate_delta: 0.0
+    hpi_change: 0.02
+  MILD:
+    description: "Mild economic slowdown"
+    pd_multiplier: 1.2
+    lgd_multiplier: 1.1
+    unemployment_rate: 0.055
+    interest_rate_delta: 0.01
+    hpi_change: -0.05
+  MODERATE:
+    description: "Recession"
+    pd_multiplier: 1.5
+    lgd_multiplier: 1.25
+    unemployment_rate: 0.075
+    interest_rate_delta: 0.02
+    hpi_change: -0.15
+  SEVERE:
+    description: "Severe Recession"
+    pd_multiplier: 2.0
+    lgd_multiplier: 1.5
+    unemployment_rate: 0.10
+    interest_rate_delta: 0.035
+    hpi_change: -0.25
+  CRISIS:
+    description: "Systemic Crisis (e.g. Subprime level)"
+    pd_multiplier: 3.5
+    lgd_multiplier: 2.0
+    unemployment_rate: 0.15
+    interest_rate_delta: 0.05
+    hpi_change: -0.40

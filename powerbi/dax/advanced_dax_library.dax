@@ -1,0 +1,39 @@
+// 1. Dynamic Ranking of Pools by ECL
+Rank_Pool_By_ECL = 
+RANKX(
+    ALLSELECTED(DimPool[PoolID]),
+    [Total_ECL],
+    , DESC, Dense
+)
+
+// 2. Dynamic Scenario Selection
+Selected_Scenario_ECL = 
+CALCULATE(
+    SUM(FactStress[Stressed_ECL]),
+    KEEPFILTERS(DimScenario[ScenarioName] = SELECTEDVALUE(DimScenario[ScenarioName], "BASE"))
+)
+
+// 3. Rolling 3M Default Rate
+Rolling_3M_Default_Rate = 
+CALCULATE(
+    [Default_Rate],
+    DATESINPERIOD(DimDate[Date], MAX(DimDate[Date]), -3, MONTH)
+)
+
+// 4. Cumulative Losses
+Cumulative_Losses = 
+CALCULATE(
+    SUM(FactLoanPerformance[NetLoss]),
+    FILTER(
+        ALL(DimDate),
+        DimDate[Date] <= MAX(DimDate[Date])
+    )
+)
+
+// 5. Dynamic Tranche Attachment Risk
+Tranche_At_Risk = 
+IF(
+    [Cumulative_Losses] > MAX(DimTranche[AttachmentAmount]),
+    "At Risk",
+    "Safe"
+)

@@ -1,0 +1,55 @@
+# Securitisation Risk Arena Assumptions
+
+# General
+random_seed: 42
+portfolio_size_target: 55000
+
+# Probability of Default (PD) Base Assumptions
+pd_base_rate: 0.02
+pd_credit_score_multiplier: -0.005 # higher score = lower PD
+pd_ltv_multiplier: 0.02 # higher LTV = higher PD
+pd_dti_multiplier: 0.015 # higher DTI = higher PD
+
+# Loss Given Default (LGD) Base Assumptions
+lgd_base_rate: 0.45
+lgd_collateral_haircut: 0.20 # Haircut applied to collateral value during recovery
+recovery_costs_pct: 0.05 # Cost to recover as % of EAD
+
+# Exposure at Default (EAD)
+ead_amortization_factor: 0.95 # Average outstanding relative to scheduled for defaulted loans
+
+# Scenario Impact
+scenario_multipliers:
+  BASE: 1.0
+  MILD: 1.2
+  MODERATE: 1.5
+  SEVERE: 2.0
+  CRISIS: 3.5
+
+# Securitisation Tranches
+tranches:
+  - name: AAA
+    seniority: 1
+    attachment: 0.15
+    detachment: 1.00
+    interest_rate: 0.04
+  - name: AA
+    seniority: 2
+    attachment: 0.10
+    detachment: 0.15
+    interest_rate: 0.06
+  - name: A
+    seniority: 3
+    attachment: 0.06
+    detachment: 0.10
+    interest_rate: 0.08
+  - name: BBB
+    seniority: 4
+    attachment: 0.03
+    detachment: 0.06
+    interest_rate: 0.11
+  - name: Equity
+    seniority: 5
+    attachment: 0.00
+    detachment: 0.03
+    interest_rate: 0.20
